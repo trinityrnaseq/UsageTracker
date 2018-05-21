@@ -1,0 +1,9 @@
+#! /bin/bash
+
+# java -Dhudson.model.DirectoryBrowserSupport.CSP="sandbox allow-scripts; default-src 'self'; script-src * 'unsafe-eval'; img-src *; style-src * 'unsafe-inline'; font-src *" -DJENKINS_HOME="/web/jenkins/jenkins_home" -jar jenkins.war --httpPort=18450 --prefix=/jenkins
+
+cd /web/jenkins
+
+java -DJENKINS_HOME="/web/jenkins/jenkins_home" -jar jenkins.war --httpPort=18450 --prefix=/jenkins
+
+cd -
