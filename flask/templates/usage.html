@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Trinity Chart</title>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+</head>
+<body>
+<h1>Trinity Use</h1>
+
+<div id='chart' class="chart"></div>
+<br />
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var chart_id = '#chart'
+
+	$(chart_id).highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Stacked bar chart'
+        },
+        xAxis: {
+            categories: [{{','.join(categories)|safe}}]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Run Count'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [
+            {% for key, value in series.iteritems() %}
+{ name: '{{ key }}', data: {{ value }} },
+      {% endfor %}
+        ]
+	});
+});
+</script>
+
+</body>
+

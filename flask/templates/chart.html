@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Trinity Chart</title>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+</head>
+<body>
+<h1>Trinity Component Timing</h1>
+{% for c in charts %}
+<a id="dataset-{{c["dataset"]}}"></a>
+<ul>
+<li>Hardware: Mason</li>
+<li>VMEM: 500G</li>
+<li>Dataset: {{c["dataset"]}}</li>
+</ul>
+
+<div id='{{c["dataset"]}}' class="chart" style="height: 400px; width: 500px"></div>
+<br />
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var chart_id = '#{{c['dataset']|safe}}'
+	var series = {{ c['series']|safe }}
+
+	$(chart_id).highcharts({
+		chart: {"height": 350, "width": 700},
+		title:  {
+                    'text': 'Component Timings'
+                },
+		xAxis: {"categories": ['fastool', 'jellyfish', 'inchworm', 'bowtie-build', 'bowtie',
+                                  'sort', 'GraphFromFasta', 'ReadsToTranscripts', 'Chrysalis',
+                                  'QuantifyGraph', 'Butterfly', 'scaffold']},
+		yAxis: {"title": {"text": 'Seconds'}, "min":0 },
+		series: series
+	});
+});
+</script>
+
+{% endfor %}
+
+<a href="/flask/download">Download as CSV</a>
+<hr />
+<p style="font-family: Arial, Helvetica, sans-serif">
+Note: 2013-02-25 and prior versions called with the --bflyCalculateCPU parameter.
+Mouse assemblies called with the --SS_lib_type RF parameter
+</p>
+</body>
+
