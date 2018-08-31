@@ -1,8 +1,8 @@
-# CTAT-VersionCheck
+# CTAT-UsageTracker
 
 ## Synopsis
 
-This archive conatins all of the files that currently are utilized in maintaining the website that shows Trinity Version information. As of August 25, 2018, this data was no longer collected. Trinity programs that were previously distributed will still attempt to check in, but the domain where they check in no longer exists. All supporting software also is no longer running.
+This archive conatins all of the files that currently are utilized in maintaining the website that shows Trinity usage tracking information. As of August 25, 2018, this data was no longer collected. Trinity programs that were previously distributed will still attempt to check in, but the domain where they check in no longer exists. All supporting software also is no longer running.
 
 ## Model
 
