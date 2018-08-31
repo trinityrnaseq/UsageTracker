@@ -43,6 +43,7 @@ Flask is at https://www.fullstackpython.com/flask.html
 
 Database Schema: trinity_versioncheck
 
+```
 mysql> show tables;
 +--------------------------------+
 | Tables_in_trinity_versioncheck |
@@ -54,10 +55,12 @@ mysql> show tables;
 | invocations                    |
 | trinity_queue                  |
 +--------------------------------+
+```
 
 The only table used for the Version Check information is invocations:
 
 mysql> SELECT `COLUMN_NAME` from `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='trinity_versioncheck' AND `TABLE_NAME`='invocations';
+```
 +-------------+
 | COLUMN_NAME |
 +-------------+
@@ -69,6 +72,7 @@ mysql> SELECT `COLUMN_NAME` from `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCH
 | created_at  |
 +-------------+
 6 rows in set (0.00 sec)
+```
 
 In our version of the software, daily invocations of the following occured:
     /web/log/rotate_and_ingest_logs.sh calls ingest_log.py.
