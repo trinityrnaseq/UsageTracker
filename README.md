@@ -74,6 +74,7 @@ mysql> SELECT `COLUMN_NAME` from `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCH
 6 rows in set (0.00 sec)
 ```
 
+
 In our version of the software, daily invocations of the following occured:
     * /web/log/rotate_and_ingest_logs.sh calls ingest_log.py.
     * /web/log/ingest_logs.py is the one that puts the data into the table.
