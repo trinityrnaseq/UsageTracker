@@ -1,4 +1,5 @@
-# CTAT-UsageTracker
+# UsageTracker
+Tracks software version usage via URL ping
 
 ## Synopsis
 
