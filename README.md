@@ -76,9 +76,8 @@ mysql> SELECT `COLUMN_NAME` from `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCH
 
 
 In our version of the software, daily invocations of the following occured:
-
-    * /web/log/rotate_and_ingest_logs.sh calls ingest_log.py.
-    * /web/log/ingest_logs.py is the one that puts the data into the table.
+* /web/log/rotate_and_ingest_logs.sh calls ingest_log.py.
+* /web/log/ingest_logs.py is the one that puts the data into the table.
 
 And also, the flask procedure that displays the web page was https://rt-trinity.uits.indiana.edu/flask/calls/monthly
 
