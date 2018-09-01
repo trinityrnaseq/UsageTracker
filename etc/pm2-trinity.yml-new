@@ -1,0 +1,17 @@
+apps:
+#   - script   : /usr/bin/python
+#    args     : trinity.py
+#    name     : 'flask'
+#    cwd      : /web/flask
+#    out_file : /web/flask/trinity.py.log
+#    err_file : /web/flask/trinity.py.stderr
+#    combine_logs : false
+#    watch    : true
+  - script   : /usr/bin/java
+    args     : 'java -DJENKINS_HOME="/web/jenkins/jenkins_home" -jar jenkins.war --httpPort=18450 --prefix=/jenkins'
+    name     : 'jenkins'
+    cwd      : /web/jenkins
+    out_file : /web/jenkins/jenkins.log
+    err_file : /web/jenkins/jenkins.stderr
+    combine_logs : false
+    watch    : true

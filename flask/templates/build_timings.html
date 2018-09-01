@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Trinity Build Timings</title>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/modules/data.js"></script>
+   <link rel="shortcut icon" href="https://trinityrnaseq.github.io/performance/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<h1>Trinity Build Timings</h1>
+
+Compare the most recent built timing by component to the average time
+
+<ul>
+<li>Hardware: Mason</li>
+<li>VMEM: 500G</li>
+<li>Dataset: Mouse</li>
+</ul>
+
+<div id='chart' class="chart"></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#chart').highcharts({
+		chart: {'renderTo': 'chart', 'zoomType':'xy'},
+		title: {'text': 'Component Timings'},
+		xAxis: {'categories': {{components|safe}} },
+		yAxis: {'min': 0, 'title': {'text': 'Seconds'}},
+		series: [{
+            name: 'Build {{ buildname }}',
+            data: [{{ latest }}]
+        },
+		{
+            name: 'Average',
+            data: [{{ average }}]
+        }]
+	});
+
+});
+</script>
+
+</body>
+

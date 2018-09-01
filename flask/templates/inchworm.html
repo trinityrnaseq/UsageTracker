@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Trinity Chart</title>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+<h1>MPI Inchworm</h1>
+{% for c in charts %}
+<div id="container{{loop.index}}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+{% endfor %}
+<script type="text/javascript">
+$(function () {
+{% for c in charts %}
+	var series = [{% for k,v in c["series"].iteritems() %}
+    {'name':'{{k}}', 'data':[{{",".join(v)}}]},
+    {% endfor %}
+];
+
+	$('#container{{loop.index}}').highcharts({
+		chart: {'width': 700, 'height': 350, 'renderTo':'container1'},
+		title:  {'text': 'Time by number of nodes'},
+        subtitle: {text: '{{c["cluster"]}} - {{c["dataset"]}} ({{c["datasize"]}} reads)'},
+                plotOptions: {'line': { 'pointStart':1 }},
+		xAxis: {'title': {'text':'Nodes'}, 'allowDecimals': false},
+		yAxis: {'min': 0, 'title': {'text': 'Seconds'}},
+		series: series
+	});
+{% endfor %}
+});
+
+</script>
+
+</body>
+

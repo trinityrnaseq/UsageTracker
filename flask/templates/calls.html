@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Trinity Version Check</title>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://highslide-software.github.io/export-csv/export-csv.js"></script>
+    <link rel="shortcut icon" href="https://trinityrnaseq.github.io/performance/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<ul>
+<h1>Trinity version checker requests</h1>
+<li><a href="/flask/calls/daily">By Day</a></li>
+<li><a href="/flask/calls/weekly">By Week</a></li>
+<li><a href="/flask/calls/monthly">By Month</a></li>
+</ul>
+<div id="by_version"></div>
+<hr />
+<div id="by_ip"></div>
+<script>
+    $(function () {
+    $('#by_version').highcharts({
+        chart: {
+            type: 'column',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'By Trinity Version'
+        },
+        xAxis: {
+            type: "datetime",
+            minTickInterval: 86400000,
+            min: Date.UTC(2015,1,14)
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total number of requests'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [
+         {% for cat in categories %}
+        {
+            name: "{{ cat }}",
+            data: [
+            {% for datum in values[cat] %}
+            [ Date.UTC( {{datum[0].year}},{{datum[0].month-1}},{{datum[0].day}}), {{datum[1]}} ],
+            {% endfor %}
+            ]
+        },
+        {% endfor %}
+    ]
+    });
+    $('#by_ip').highcharts({
+        chart: {
+            type: 'column',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'By Unique IP Address'
+        },
+        xAxis: {
+            type: "datetime",
+            minTickInterval: 86400000,
+            min: Date.UTC(2015,1,14)
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Count of unique IP addresses'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [
+         {% for cat in categories %}
+        {
+            name: "{{ cat }}",
+            data: [
+            {% for datum in by_ip[cat] %}
+            [ Date.UTC( {{datum[0].year}},{{datum[0].month-1}},{{datum[0].day}}), {{datum[1]}} ],
+            {% endfor %}
+            ]
+        },
+        {% endfor %}
+    ]
+    });
+});
+</script>
+</body>
+</html>

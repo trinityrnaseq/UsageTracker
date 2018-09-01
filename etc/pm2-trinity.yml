@@ -1,0 +1,18 @@
+apps:
+  - script   : /usr/bin/python
+    args     : trinity.py
+    name     : 'flask'
+    cwd      : /web/flask
+    out_file : /web/flask/trinity.py.log
+    err_file : /web/flask/trinity.py.stderr
+    combine_logs : false
+    watch    : true
+  - script   : /web/etc/start_jenkins
+    name     : 'jenkins'
+    cwd      : /web/jenkins
+    out_file : /web/jenkins/jenkins.log
+    err_file : /web/jenkins/jenkins.stderr
+    combine_logs : false
+    watch    : true
+    interpreter      : '/bin/bash'
+    interpreter_args : ' --login'
